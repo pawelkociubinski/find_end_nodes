@@ -1,5 +1,5 @@
 input:
-```
+```typescript
 A: {
   B: {
     E: true;
@@ -14,7 +14,7 @@ A: {
 ```
 
 output:
-```
+```typescript
 [E, G, D]
 ```
 
