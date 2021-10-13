@@ -1,33 +1,30 @@
-input:
+How to use:
+
 ```typescript
-A: {
-  B: {
-    E: true;
-  },
-  C: {
-    F: {
-      G: true
-    }
-  },
-  D: true
+const input = {
+  A: {
+    B: {
+      E: true;
+    },
+    C: {
+      F: {
+        G: true
+      }
+    },
+    D: true
+  }
 }
-```
 
-output:
-```typescript
-[E, G, D]
-```
+findEndNodes(input) // output: [E, G, D]
 
+```
 
 ```typescript
 import { reduce } from "lodash";
 
 type Obj = { [leaf: string]: Obj | boolean };
 
-export const findEndNodes = (
-  accumulator: string[] = [],
-  obj: Obj = {}
-): string[] => {
+export const findEndNodes = (obj: Obj, accumulator?: string[] = []): string[] => {
   return reduce(
     obj,
     (acc: string[], value: Obj | boolean, key: keyof Obj) => {
@@ -36,7 +33,7 @@ export const findEndNodes = (
       if (isLeaf) {
         return [...acc, key];
       } else {
-        return findEndNodes(acc, value);
+        return findEndNodes(value, acc);
       }
     },
     accumulator
